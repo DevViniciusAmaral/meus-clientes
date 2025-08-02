@@ -1,7 +1,26 @@
 {
   "expo": {
-    "name": "meus-clientes",
+    "name": "Meus Clientes",
     "slug": "meus-clientes",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/app-icon.png",
+    "splash": {
+      "backgroundColor": "#FFFFFF",
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "cover"
+    },
+    "android": {
+      "package": "com.viniciusamaraldev.meusclientes",
+      "version": "1",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "com.viniciusamaraldev.meusclientes",
+      "buildNumber": "1"
+    }
   }
 }

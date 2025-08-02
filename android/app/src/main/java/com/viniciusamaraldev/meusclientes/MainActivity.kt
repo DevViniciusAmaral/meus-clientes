@@ -1,4 +1,4 @@
-package com.meusclientes
+package com.viniciusamaraldev.meusclientes
 
 import android.os.Build
 import android.os.Bundle

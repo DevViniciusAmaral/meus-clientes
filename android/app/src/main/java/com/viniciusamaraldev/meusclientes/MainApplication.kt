@@ -1,4 +1,4 @@
-package com.meusclientes
+package com.viniciusamaraldev.meusclientes
 
 import android.app.Application
 import android.content.res.Configuration
