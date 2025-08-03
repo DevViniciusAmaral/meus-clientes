@@ -26,6 +26,7 @@ export const TextInput = forwardRef<any, TextInputProps>(
         {...rest}
         ref={ref}
         style={[styles.input(size, fontFamily), style]}
+        placeholderTextColor={`${theme.colors.typography}40`}
       />
     );
   }
