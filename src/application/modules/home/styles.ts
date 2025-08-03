@@ -2,8 +2,22 @@ import { createStyleSheet } from "react-native-unistyles";
 
 export const stylesheet = createStyleSheet((theme) => ({
   container: {
-    padding: 16,
-    gap: 16,
+    // gap: 16,
+  },
+  
+  searchbar: {
+    backgroundColor: theme.colors.background,
+  },
+
+  header: {
+    gap: 8,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    backgroundColor: theme.colors.primary,
+  },
+
+  headerTitle: {
+    color: theme.colors.background,
   },
 
   safeAreaView: {
@@ -20,5 +34,22 @@ export const stylesheet = createStyleSheet((theme) => ({
     backgroundColor: theme.colors.primary,
     alignItems: "center",
     justifyContent: "center",
+    borderWidth: 2,
+    borderColor: theme.colors.background,
+  },
+
+  item: {
+    padding: 16,
+  },
+
+  clientListContentContainerStyle: {
+    paddingHorizontal: 8,
+    paddingBottom: 100,
+    paddingTop: 8,
+  },
+
+  separator: {
+    borderBottomWidth: 1,
+    borderBottomColor: `${theme.colors.typography}10`,
   },
 }));
