@@ -9,16 +9,24 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.2.1",
+    "date-fns": "^4.1.0",
     "expo": "~53.0.20",
     "expo-status-bar": "~2.2.3",
     "lucide-react-native": "^0.536.0",
     "react": "19.0.0",
+    "react-hook-form": "^7.62.0",
     "react-native": "0.79.5",
+    "react-native-awesome-alerts": "^2.0.0",
+    "react-native-gesture-handler": "~2.24.0",
     "react-native-mmkv": "^3.3.0",
+    "react-native-modalize": "^2.1.1",
     "react-native-safe-area-context": "5.4.0",
     "react-native-svg": "15.11.2",
     "react-native-unistyles": "2.43.0",
     "react-native-uuid": "^2.0.3",
+    "toastify-react-native": "^7.2.3",
+    "zod": "^4.0.14",
     "zustand": "^5.0.7"
   },
   "devDependencies": {
