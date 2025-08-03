@@ -13,12 +13,23 @@ import { groupClientsByFirstLetter } from "@/application/utils/GroupClientsByFir
 import { ClientCard } from "./components/client-card";
 import { SectionHeader } from "./components/section-header";
 import { ClientEmptyList } from "./components/client-empty-list";
+import { AddClientModal } from "./components/add-client-modal";
+import { useModalize } from "react-native-modalize";
+import AwesomeAlert from "react-native-awesome-alerts";
 
 export const Home = () => {
   const { styles, theme } = useStyles(stylesheet);
-  const { clients } = useClient();
+  const { clients, deleteClient } = useClient();
+
+  const {
+    ref: addClientModalRef,
+    open: openAddClientModal,
+    close: closeAddClientModal,
+  } = useModalize();
 
   const [searchValue, setSearchValue] = useState("");
+  const [selectedClientId, setSelectedClientId] = useState<string>();
+  const [showDeleteClientAlert, setShowDeleteClientAlert] = useState(false);
 
   const clientSectionList = useMemo(
     () =>
@@ -29,8 +40,23 @@ export const Home = () => {
             )
           : clients
       ),
-    [clients]
+    [clients, searchValue]
   );
+
+  const handleEditClient = (clientId: string) => {
+    setSelectedClientId(clientId);
+    openAddClientModal();
+  };
+
+  const handleDeleteClient = (clientId: string) => {
+    setSelectedClientId(clientId);
+    setShowDeleteClientAlert(true);
+  };
+
+  const handleCloseAddClientModal = () => {
+    setSelectedClientId(undefined);
+    closeAddClientModal();
+  };
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
@@ -50,28 +76,62 @@ export const Home = () => {
         </View>
 
         {clients.length === 0 ? (
-          <ClientEmptyList />
+          <ClientEmptyList onPressAddClientModal={openAddClientModal} />
         ) : (
           <SectionList
             stickySectionHeadersEnabled
             sections={clientSectionList}
             keyExtractor={(item) => item.id}
             contentContainerStyle={styles.clientListContentContainerStyle}
-            renderItem={({ item }) => <ClientCard {...item} />}
+            renderItem={({ item }) => (
+              <ClientCard
+                client={item}
+                onEdit={(clientId) => handleEditClient(clientId)}
+                onDelete={(clientId) => handleDeleteClient(clientId)}
+              />
+            )}
             ItemSeparatorComponent={() => <View style={styles.separator} />}
             renderSectionHeader={({ section }) => (
               <SectionHeader {...section} />
             )}
-            ListEmptyComponent={() => <ClientEmptyList />}
           />
         )}
 
         {clients.length > 0 && (
-          <Button style={styles.absoluteButton}>
+          <Button
+            style={styles.absoluteButton}
+            onPress={() => openAddClientModal()}
+          >
             <Plus size={24} color={theme.colors.background} />
           </Button>
         )}
       </Layout>
+
+      <AddClientModal
+        ref={addClientModalRef}
+        clientId={selectedClientId}
+        onClose={handleCloseAddClientModal}
+      />
+
+      <AwesomeAlert
+        show={showDeleteClientAlert}
+        showProgress={false}
+        title="Confirmação"
+        message="Essa ação é irreversível. Tem certeza que deseja excluir definitivamente este cliente?"
+        closeOnHardwareBackPress={false}
+        showCancelButton={true}
+        showConfirmButton={true}
+        cancelText="Cancelar"
+        confirmText="Continuar"
+        confirmButtonColor={theme.colors.alert}
+        onConfirmPressed={() => {
+          deleteClient(selectedClientId);
+          setSelectedClientId(undefined);
+          setShowDeleteClientAlert(false);
+        }}
+        cancelButtonColor={`${theme.colors.typography}60`}
+        onCancelPressed={() => setShowDeleteClientAlert(false)}
+      />
     </SafeAreaView>
   );
 };

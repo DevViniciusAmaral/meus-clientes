@@ -21,7 +21,7 @@ export const stylesheet = createStyleSheet((theme) => ({
   },
 
   safeAreaView: {
-    flex: 1,
+    flexGrow: 1,
   },
 
   absoluteButton: {

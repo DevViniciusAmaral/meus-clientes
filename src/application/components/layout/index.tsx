@@ -16,11 +16,13 @@ import {
 
 interface LayoutProps extends ScrollViewProps {
   safeTopEnabled?: boolean;
+  safeBottomEnabled?: boolean;
   statusBar?: { style: "dark" | "light"; color: string };
 }
 
 export const Layout = ({
   safeTopEnabled,
+  safeBottomEnabled,
   scrollEnabled,
   style,
   statusBar,
@@ -28,8 +30,9 @@ export const Layout = ({
 }: LayoutProps) => {
   const { styles, theme } = useStyles(stylesheet);
 
-  const { top } = useSafeAreaInsets();
+  const { top, bottom } = useSafeAreaInsets();
   const paddingTop = safeTopEnabled ? top : 0;
+  const paddingBottom = safeBottomEnabled ? bottom : 0;
 
   const behavior = Platform.OS === "ios" ? "padding" : "height";
 
@@ -42,7 +45,7 @@ export const Layout = ({
     <KeyboardAvoidingView
       enabled
       behavior={behavior}
-      style={styles.container(paddingTop)}
+      style={styles.container(paddingTop, paddingBottom)}
     >
       {scrollEnabled ? (
         <ScrollView {...rest} />
