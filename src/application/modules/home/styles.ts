@@ -2,12 +2,23 @@ import { createStyleSheet } from "react-native-unistyles";
 
 export const stylesheet = createStyleSheet((theme) => ({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    padding: 16,
+    gap: 16,
   },
 
-  text: {
-    fontFamily: theme.fonts.bold,
-    fontSize: 50,
+  safeAreaView: {
+    flex: 1,
+  },
+
+  absoluteButton: {
+    position: "absolute",
+    bottom: 16,
+    right: 16,
+    width: 60,
+    height: 60,
+    borderRadius: 100,
+    backgroundColor: theme.colors.primary,
+    alignItems: "center",
+    justifyContent: "center",
   },
 }));
