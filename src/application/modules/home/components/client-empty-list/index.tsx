@@ -21,7 +21,7 @@ export const ClientEmptyList = ({
       <Text>Nenhum cliente cadastrado até o momento!</Text>
       <Button style={styles.addButton} onPress={onPressAddClientModal}>
         <Text weight="bold" style={styles.addTextButton}>
-          Cadastrar novo cliente
+          Cadastrar novo
         </Text>
       </Button>
     </View>

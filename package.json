@@ -12,6 +12,8 @@
     "@hookform/resolvers": "^5.2.1",
     "date-fns": "^4.1.0",
     "expo": "~53.0.20",
+    "expo-build-properties": "~0.14.8",
+    "expo-calendar": "~14.1.4",
     "expo-status-bar": "~2.2.3",
     "lucide-react-native": "^0.536.0",
     "react": "19.0.0",

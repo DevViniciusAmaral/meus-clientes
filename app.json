@@ -21,6 +21,14 @@
     "ios": {
       "bundleIdentifier": "com.viniciusamaraldev.meusclientes",
       "buildNumber": "1"
-    }
+    },
+    "plugins": [
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "The app needs to access your calendar."
+        }
+      ]
+    ]
   }
 }

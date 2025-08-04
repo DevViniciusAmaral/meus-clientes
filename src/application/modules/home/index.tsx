@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useStyles } from "react-native-unistyles";
 import { stylesheet } from "./styles";
 import { Layout } from "@/application/components/layout";
@@ -16,6 +16,7 @@ import { ClientEmptyList } from "./components/client-empty-list";
 import { AddClientModal } from "./components/add-client-modal";
 import { useModalize } from "react-native-modalize";
 import AwesomeAlert from "react-native-awesome-alerts";
+import * as Calendar from "expo-calendar";
 
 export const Home = () => {
   const { styles, theme } = useStyles(stylesheet);
@@ -57,6 +58,37 @@ export const Home = () => {
     setSelectedClientId(undefined);
     closeAddClientModal();
   };
+
+  (async () => {
+    const { status } = await Calendar.requestCalendarPermissionsAsync();
+
+    const calendarId = await Calendar.createCalendarAsync({
+      title: "Eventos Expo",
+      color: "#2196F3",
+      entityType: Calendar.EntityTypes.EVENT,
+      source: { type: Calendar.SourceType.LOCAL, name: "local" },
+      name: "Eventos Mensais",
+      accessLevel: Calendar.CalendarAccessLevel.OWNER,
+    });
+
+    const startDate = new Date(Date.now());
+    startDate.setMinutes(1);
+    const endDate = new Date(startDate.getTime() + 60 * 60 * 1000);
+
+    const eventId = await Calendar.createEventAsync(calendarId, {
+      title: "Título do evento",
+      notes: "Notas do evento",
+      startDate,
+      endDate,
+      timeZone: "America/Sao_Paulo",
+      recurrenceRule: {
+        frequency: Calendar.Frequency.MONTHLY,
+        interval: 1,
+      },
+    });
+
+    console.log("Evento mensal criado com ID:", eventId);
+  })();
 
   return (
     <SafeAreaView style={styles.safeAreaView}>
